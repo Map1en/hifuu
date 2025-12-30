@@ -2,6 +2,8 @@ import * as React from "react";
 
 import { open } from "@tauri-apps/plugin-dialog";
 
+import { invoke } from "@tauri-apps/api/core";
+
 import { Example, ExampleWrapper } from "@/components/example";
 import {
   AlertDialog,
@@ -105,6 +107,7 @@ export function ComponentExample() {
 async function openFolder() {
   const select = await open({ directory: true });
   console.log("Selected folder:", select);
+  await invoke("get_all_screenshot", { path: select });
 }
 
 function CardExample() {
